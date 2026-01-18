@@ -46,7 +46,13 @@ export default function Navbar() {
     <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={styles.container}>
         <div className={styles.logo}>
-          <span id="portfolio-logo" className={styles.artistLogo} data-text={logoText}>{logoText}</span>
+          <button
+            onClick={() => window.location.href = '/admin/login'}
+            className={styles.logoButton}
+            aria-label="Go to admin login"
+          >
+            <span id="portfolio-logo" className={styles.artistLogo} data-text={logoText}>{logoText}</span>
+          </button>
         </div>
 
         <button
