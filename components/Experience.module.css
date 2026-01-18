@@ -1,0 +1,75 @@
+.timeline {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.card {
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-md);
+    gap: var(--spacing-md);
+}
+
+.card h3 {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-primary);
+}
+
+.card h4 {
+    font-size: var(--font-size-lg);
+    color: var(--color-accent-secondary);
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.duration {
+    flex-shrink: 0;
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--color-accent-gradient);
+    color: var(--color-text-primary);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+.responsibilities {
+    list-style: none;
+    padding: 0;
+}
+
+.responsibilities li {
+    position: relative;
+    padding-left: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+.responsibilities li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-primary);
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .duration {
+        align-self: flex-start;
+    }
+}

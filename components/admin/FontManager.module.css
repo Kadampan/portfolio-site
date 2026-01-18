@@ -1,0 +1,496 @@
+.fontManager {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.header {
+    margin-bottom: 2rem;
+}
+
+.header h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.header p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.message {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    animation: slideIn 0.3s ease;
+}
+
+.message.success {
+    background: rgba(68, 255, 68, 0.1);
+    border: 1px solid rgba(68, 255, 68, 0.3);
+    color: #44ff44;
+}
+
+.message.error {
+    background: rgba(255, 68, 68, 0.1);
+    border: 1px solid rgba(255, 68, 68, 0.3);
+    color: #ff4444;
+}
+
+.uploadSection {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.uploadSection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+    background-size: 200% 100%;
+    animation: gradientFlow 3s ease infinite;
+}
+
+.uploadSection h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+}
+
+.uploadForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formGroup label {
+    font-weight: 500;
+    color: #e0e0ff;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.formGroup input[type="text"] {
+    padding: 0.75rem;
+    background: rgba(102, 126, 234, 0.08);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.formGroup input:focus {
+    outline: none;
+    border-color: rgba(102, 126, 234, 0.6);
+    background: rgba(102, 126, 234, 0.12);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+}
+
+.fileInputWrapper {
+    position: relative;
+}
+
+.fileInput {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.fileLabel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    border: 2px dashed rgba(102, 126, 234, 0.4);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.fileLabel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(102, 126, 234, 0.1) 50%, transparent 70%);
+    background-size: 200% 200%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.fileLabel:hover {
+    border-color: rgba(102, 126, 234, 0.7);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
+    transform: translateY(-2px);
+}
+
+.fileLabel:hover::before {
+    opacity: 1;
+    animation: shimmerAcross 2s ease infinite;
+}
+
+.fileName {
+    font-size: 1.05rem;
+    color: #e0e0ff;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+}
+
+.fileSize {
+    font-size: 0.85rem;
+    color: #a8a8ff;
+    font-weight: 500;
+}
+
+.fileTypes {
+    font-size: 0.85rem;
+    color: #a8a8ff;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+.uploadForm button {
+    align-self: flex-start;
+    padding: 0.875rem 2rem;
+}
+
+.instructions {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+    border-left: 4px solid rgba(102, 126, 234, 0.7);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.instructions::before {
+    content: '💡';
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    opacity: 0.3;
+}
+
+.instructions h5 {
+    margin-bottom: 0.75rem;
+    color: #e0e0ff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.instructions ol {
+    margin-left: 1.25rem;
+    color: #c0c0ff;
+    font-size: 0.9rem;
+}
+
+.instructions li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes shimmerAcross {
+    0% {
+        background-position: -200% -200%;
+    }
+
+    100% {
+        background-position: 200% 200%;
+    }
+}
+
+.fontLists {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.fontList {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.fontList::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.8), transparent);
+    animation: shimmer 3s infinite;
+}
+
+.fontList:hover {
+    border-color: rgba(102, 126, 234, 0.6);
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
+    transform: translateY(-2px);
+}
+
+.fontList h4 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.fontItems {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.fontItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+    border: 1px solid rgba(102, 126, 234, 0.25);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.fontItem::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.fontItem:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+    border-color: rgba(102, 126, 234, 0.5);
+    transform: translateX(5px);
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.25);
+}
+
+.fontItem:hover::before {
+    opacity: 1;
+}
+
+.fontInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.fontNameDisplay {
+    font-size: 1.15rem;
+    color: #e0e0ff;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+    letter-spacing: 0.02em;
+}
+
+.fontMeta {
+    font-size: 0.8rem;
+    color: #a8a8ff;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.deleteBtn {
+    background: linear-gradient(135deg, rgba(255, 68, 68, 0.15) 0%, rgba(255, 100, 100, 0.15) 100%);
+    border: 1px solid rgba(255, 68, 68, 0.4);
+    color: #ff6b6b;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.deleteBtn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 68, 68, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.deleteBtn:hover {
+    background: linear-gradient(135deg, rgba(255, 68, 68, 0.25) 0%, rgba(255, 100, 100, 0.25) 100%);
+    border-color: rgba(255, 68, 68, 0.6);
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(255, 68, 68, 0.3);
+    color: #ff4444;
+}
+
+.deleteBtn:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.deleteBtn:active {
+    transform: scale(0.95);
+}
+
+.emptyState {
+    text-align: center;
+    padding: 2.5rem;
+    color: #9999cc;
+    font-style: italic;
+    background: rgba(102, 126, 234, 0.05);
+    border: 2px dashed rgba(102, 126, 234, 0.2);
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.systemFonts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.systemFont {
+    padding: 0.65rem 1.15rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+    border: 1px solid rgba(102, 126, 234, 0.4);
+    border-radius: 8px;
+    color: #c0c0ff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    text-shadow: 0 0 8px rgba(102, 126, 234, 0.2);
+}
+
+.systemFont::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.systemFont:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0.25) 100%);
+    border-color: rgba(102, 126, 234, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    color: #e0e0ff;
+}
+
+.systemFont:hover::before {
+    left: 100%;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 1024px) {
+    .fontLists {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .fontManager {
+        padding: 1.5rem;
+    }
+
+    .uploadSection {
+        padding: 1rem;
+    }
+
+    .fileLabel {
+        padding: 1.5rem;
+    }
+}

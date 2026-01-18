@@ -6,12 +6,22 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "set-admin": "node scripts/set-admin.js"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
+    "bcryptjs": "^3.0.3",
+    "framer-motion": "^12.24.7",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.0.2",
     "next": "16.1.1",
+    "nodemailer": "^7.0.12",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "three": "^0.182.0",
+    "three-stdlib": "^2.36.1"
   },
   "devDependencies": {
     "eslint": "^9",

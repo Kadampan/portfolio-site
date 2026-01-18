@@ -1,0 +1,57 @@
+.timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    position: relative;
+}
+
+.duration {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--color-accent-gradient);
+    color: var(--color-text-primary);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+}
+
+.card h3 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-primary);
+}
+
+.card h4 {
+    font-size: var(--font-size-lg);
+    color: var(--color-accent-secondary);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+}
+
+.highlights {
+    list-style: none;
+    padding: 0;
+}
+
+.highlights li {
+    position: relative;
+    padding-left: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-secondary);
+}
+
+.highlights li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-primary);
+    font-weight: bold;
+}

@@ -1,0 +1,31 @@
+{
+  "customFonts": [
+    {
+      "name": "creme nuts",
+      "fileName": "cremenuts.ttf",
+      "path": "/fonts/custom/cremenuts.ttf",
+      "format": "ttf",
+      "uploadedAt": "2026-01-09T08:19:23.666Z"
+    },
+    {
+      "name": "SciencePersonalUseOnly JpG37",
+      "fileName": "SciencePersonalUseOnlyJpG37.otf",
+      "path": "/fonts/custom/SciencePersonalUseOnlyJpG37.otf",
+      "format": "otf",
+      "uploadedAt": "2026-01-09T08:35:39.516Z"
+    }
+  ],
+  "systemFonts": [
+    "Aquire",
+    "Orbitron",
+    "Russo One",
+    "Michroma",
+    "Audiowide",
+    "Exo 2",
+    "Rajdhani",
+    "Bebas Neue",
+    "Montserrat",
+    "Poppins",
+    "Inter"
+  ]
+}

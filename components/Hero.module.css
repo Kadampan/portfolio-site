@@ -1,0 +1,277 @@
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 80px;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.gradient1,
+.gradient2,
+.gradient3 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.3;
+    animation: float 8s ease-in-out infinite;
+}
+
+.gradient1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--color-accent-primary), transparent);
+    top: -200px;
+    left: -200px;
+}
+
+.gradient2 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--color-accent-secondary), transparent);
+    bottom: -250px;
+    right: -250px;
+    animation-delay: 2s;
+}
+
+.gradient3 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #ec4899, transparent);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: 4s;
+}
+
+.bannerImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+
+.container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-3xl);
+}
+
+.content {
+    flex: 1;
+    min-width: 400px;
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.title {
+    font-size: var(--font-size-6xl);
+    font-weight: 900;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.1;
+}
+
+.subtitle {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto var(--spacing-xl);
+}
+
+.buttonGroup {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.statsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-lg);
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.stat {
+    padding: var(--spacing-lg);
+    background: var(--color-glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--color-glass-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+}
+
+.stat:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-glow);
+}
+
+.stat h3 {
+    font-size: var(--font-size-4xl);
+    background: var(--color-accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--spacing-xs);
+}
+
+.stat p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    margin: 0;
+}
+
+/* Floating Artist Logo */
+.floatingLogo {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    animation: floatSlow 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.artistLogoText {
+    font-family: 'Aquire', 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    padding: 2.5rem 3.5rem;
+    background: linear-gradient(90deg, #00ffff 0%, #00d4ff 20%, #0088ff 40%, #00d4ff 60%, #00ffff 80%, #ffffff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: scifiFlow 3s linear infinite, scifiPulse 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.9)) drop-shadow(0 0 25px rgba(0, 212, 255, 0.7)) drop-shadow(0 0 40px rgba(0, 136, 255, 0.5));
+    z-index: 2;
+}
+
+/* Circular glowing background for floating logo */
+.artistLogoText::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.2) 0%, rgba(0, 212, 255, 0.15) 40%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: circleGlowHero 3s ease-in-out infinite;
+    filter: blur(25px);
+}
+
+/* Outer glow ring for floating logo */
+.artistLogoText::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 136, 255, 0.15) 0%, rgba(0, 212, 255, 0.08) 50%, transparent 70%);
+    border-radius: 50%;
+    z-index: -2;
+    animation: circleGlowHero 3s ease-in-out infinite reverse;
+    filter: blur(35px);
+}
+
+@keyframes floatSlow {
+
+    0%,
+    100% {
+        transform: translateY(-50%) translateX(0);
+    }
+
+    50% {
+        transform: translateY(-50%) translateX(10px);
+    }
+}
+
+@keyframes circleGlowHero {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale();
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.2);
+    }
+}
+
+@keyframes scifiFlow {
+    0% {
+        background-position: 200% center;
+    }
+
+    100% {
+        background-position: 0% center;
+    }
+}
+
+@keyframes scifiPulse {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 25px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 40px rgba(255, 255, 255, 0.5));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 16px rgb(255, 255, 255)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 50px rgba(255, 255, 255, 0.7));
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: auto;
+        padding: var(--spacing-3xl) 0;
+    }
+
+    .title {
+        font-size: var(--font-size-4xl);
+    }
+
+    .subtitle {
+        font-size: var(--font-size-lg);
+    }
+
+    .statsContainer {
+        grid-template-columns: 1fr;
+    }
+}
