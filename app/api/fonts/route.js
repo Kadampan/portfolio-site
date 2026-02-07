@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';
 import fs from 'fs';
 import path from 'path';
+import connectDB from '@/lib/mongodb';
+import Fonts from '@/models/Fonts';
 
 export async function POST(request) {
     try {
@@ -38,12 +40,13 @@ export async function POST(request) {
 
         await writeFile(filePath, buffer);
 
-        // Update fonts registry
-        const registryPath = path.join(process.cwd(), 'data', 'fonts.json');
-        let fontsRegistry = { customFonts: [] };
+        // Connect to MongoDB and update fonts registry
+        await connectDB();
 
-        if (fs.existsSync(registryPath)) {
-            fontsRegistry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+        let fontsRegistry = await Fonts.findOne();
+
+        if (!fontsRegistry) {
+            fontsRegistry = new Fonts({ customFonts: [], systemFonts: [] });
         }
 
         // Check if font already exists
@@ -54,7 +57,7 @@ export async function POST(request) {
             fileName: fileName,
             path: `/fonts/custom/${fileName}`,
             format: fileExtension,
-            uploadedAt: new Date().toISOString()
+            uploadedAt: new Date()
         };
 
         if (existingIndex >= 0) {
@@ -65,8 +68,8 @@ export async function POST(request) {
             fontsRegistry.customFonts.push(fontData);
         }
 
-        // Save registry
-        fs.writeFileSync(registryPath, JSON.stringify(fontsRegistry, null, 2));
+        // Save to MongoDB
+        await fontsRegistry.save();
 
         return NextResponse.json({
             success: true,
@@ -85,14 +88,25 @@ export async function POST(request) {
 // GET: List all custom fonts
 export async function GET() {
     try {
-        const registryPath = path.join(process.cwd(), 'data', 'fonts.json');
+        await connectDB();
 
-        if (!fs.existsSync(registryPath)) {
-            return NextResponse.json({ customFonts: [] });
+        let fontsRegistry = await Fonts.findOne();
+
+        if (!fontsRegistry) {
+            return NextResponse.json({
+                customFonts: [],
+                systemFonts: []
+            });
         }
 
-        const fontsRegistry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
-        return NextResponse.json(fontsRegistry);
+        // Convert to plain object and remove MongoDB fields
+        const fontsData = fontsRegistry.toObject();
+        delete fontsData._id;
+        delete fontsData.__v;
+        delete fontsData.createdAt;
+        delete fontsData.updatedAt;
+
+        return NextResponse.json(fontsData);
 
     } catch (error) {
         console.error('Failed to read fonts:', error);
@@ -105,12 +119,14 @@ export async function DELETE(request) {
     try {
         const { fontName } = await request.json();
 
-        const registryPath = path.join(process.cwd(), 'data', 'fonts.json');
-        if (!fs.existsSync(registryPath)) {
+        await connectDB();
+
+        let fontsRegistry = await Fonts.findOne();
+
+        if (!fontsRegistry) {
             return NextResponse.json({ error: 'No fonts found' }, { status: 404 });
         }
 
-        const fontsRegistry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
         const fontIndex = fontsRegistry.customFonts.findIndex(f => f.name === fontName);
 
         if (fontIndex === -1) {
@@ -127,7 +143,7 @@ export async function DELETE(request) {
 
         // Remove from registry
         fontsRegistry.customFonts.splice(fontIndex, 1);
-        fs.writeFileSync(registryPath, JSON.stringify(fontsRegistry, null, 2));
+        await fontsRegistry.save();
 
         return NextResponse.json({
             success: true,

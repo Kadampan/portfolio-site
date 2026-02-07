@@ -1,0 +1,109 @@
+{
+  "logo": {
+    "text": "k",
+    "fontFamily": "creme nuts",
+    "fontSize": "2.4rem",
+    "fontWeight": "400",
+    "letterSpacing": "0.12em",
+    "textTransform": "uppercase",
+    "gradientColors": [
+      "#00ffff",
+      "#00d4ff",
+      "#0088ff",
+      "#00d4ff",
+      "#00ffff",
+      "#ffffff"
+    ],
+    "animation": {
+      "enabled": true,
+      "type": "scifi",
+      "speed": "3s",
+      "pulseEnabled": true,
+      "pulseSpeed": "2s"
+    },
+    "glow": {
+      "enabled": true,
+      "color": "#00ffff",
+      "intensity": "high",
+      "layers": 3
+    }
+  },
+  "headings": {
+    "fontFamily": "creme nuts",
+    "fontWeight": "700",
+    "letterSpacing": "0.05em",
+    "textTransform": "none",
+    "h1Size": "4rem",
+    "h2Size": "3rem",
+    "h3Size": "2.5rem",
+    "h4Size": "2rem",
+    "color": "#ffffff"
+  },
+  "sectionTitles": {
+    "fontFamily": "creme nuts",
+    "fontSize": "3rem",
+    "fontWeight": "800",
+    "letterSpacing": "0.08em",
+    "textTransform": "uppercase",
+    "color": "#ffffff",
+    "gradientEnabled": true,
+    "gradientColors": [
+      "#8b5cf6",
+      "#06b6d4"
+    ]
+  },
+  "buttons": {
+    "fontFamily": "creme nuts",
+    "fontSize": "1rem",
+    "fontWeight": "600",
+    "letterSpacing": "0.08em",
+    "textTransform": "uppercase",
+    "borderRadius": "1rem",
+    "animation": {
+      "hoverLift": true,
+      "hoverGlow": true
+    },
+    "primary": {
+      "bgGradient": [
+        "#8b5cf6",
+        "#06b6d4"
+      ],
+      "textColor": "#ffffff"
+    },
+    "outline": {
+      "borderColor": "#8b5cf6",
+      "textColor": "#8b5cf6",
+      "hoverBg": "#8b5cf6",
+      "hoverTextColor": "#ffffff"
+    }
+  },
+  "navLinks": {
+    "fontFamily": "creme nuts",
+    "fontSize": "1rem",
+    "fontWeight": "500",
+    "letterSpacing": "0.05em",
+    "color": "#a0a0b0",
+    "hoverColor": "#ffffff",
+    "activeColor": "#8b5cf6"
+  },
+  "hyperlinks": {
+    "fontFamily": "inherit",
+    "fontWeight": "500",
+    "color": "#17141f",
+    "hoverColor": "#06b6d4",
+    "underline": false,
+    "hoverUnderline": true,
+    "animation": {
+      "enabled": true,
+      "transitionSpeed": "0.3s"
+    }
+  },
+  "globalColors": {
+    "primary": "#8b5cf6",
+    "secondary": "#06b6d4",
+    "background": "#0a0a0f",
+    "cardBackground": "#121218",
+    "textPrimary": "#ffffff",
+    "textSecondary": "#a0a0b0"
+  }
+}

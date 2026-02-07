@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import fs from 'fs';
-import path from 'path';
+import connectDB from '@/lib/mongodb';
+import Admin from '@/models/Admin';
 
 export async function POST(request) {
     try {
@@ -16,12 +16,18 @@ export async function POST(request) {
             return NextResponse.json({ error: 'New password must be at least 6 characters' }, { status: 400 });
         }
 
-        // Read current admin data
-        const adminPath = path.join(process.cwd(), 'data', 'admin.json');
-        const adminData = JSON.parse(fs.readFileSync(adminPath, 'utf8'));
+        // Connect to MongoDB
+        await connectDB();
+
+        // Find admin user (assuming username is 'admin')
+        const admin = await Admin.findOne({ username: 'admin' });
+
+        if (!admin) {
+            return NextResponse.json({ error: 'Admin user not found' }, { status: 404 });
+        }
 
         // Verify current password
-        const isValid = await bcrypt.compare(currentPassword, adminData.password);
+        const isValid = await bcrypt.compare(currentPassword, admin.password);
 
         if (!isValid) {
             return NextResponse.json({ error: 'Current password is incorrect' }, { status: 401 });
@@ -30,11 +36,9 @@ export async function POST(request) {
         // Hash new password
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-        // Update admin data
-        adminData.password = hashedPassword;
-
-        // Save to file
-        fs.writeFileSync(adminPath, JSON.stringify(adminData, null, 2));
+        // Update password
+        admin.password = hashedPassword;
+        await admin.save();
 
         return NextResponse.json({
             success: true,

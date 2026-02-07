@@ -93,7 +93,7 @@ export default function Home() {
         borderTop: '1px solid var(--color-glass-border)'
       }}>
         <p style={{ color: 'var(--color-text-secondary)' }}>
-          © 2026 3D Developer Portfolio. Built with Next.js
+          © Kadampan, My Portfolio
         </p>
       </footer>
     </main>

@@ -1,21 +1,23 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import connectDB from '@/lib/mongodb';
+import Admin from '@/models/Admin';
 
-const ADMIN_FILE = path.join(process.cwd(), 'data', 'admin.json');
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this-in-production';
 
 export async function POST(request) {
     try {
         const { username, password } = await request.json();
 
-        // Read admin credentials
-        const adminData = JSON.parse(await fs.readFile(ADMIN_FILE, 'utf-8'));
+        // Connect to MongoDB
+        await connectDB();
 
-        // Check username
-        if (username !== adminData.username) {
+        // Find admin user in MongoDB
+        const admin = await Admin.findOne({ username });
+
+        // Check if user exists
+        if (!admin) {
             return NextResponse.json(
                 { message: 'Invalid credentials' },
                 { status: 401 }
@@ -23,7 +25,7 @@ export async function POST(request) {
         }
 
         // Check password
-        const isPasswordValid = await bcrypt.compare(password, adminData.password);
+        const isPasswordValid = await bcrypt.compare(password, admin.password);
         if (!isPasswordValid) {
             return NextResponse.json(
                 { message: 'Invalid credentials' },
@@ -33,7 +35,7 @@ export async function POST(request) {
 
         // Generate JWT token
         const token = jwt.sign(
-            { username: adminData.username },
+            { username: admin.username },
             JWT_SECRET,
             { expiresIn: '24h' }
         );

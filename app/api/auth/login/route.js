@@ -1,20 +1,24 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import fs from 'fs';
-import path from 'path';
+import connectDB from '@/lib/mongodb';
+import Admin from '@/models/Admin';
 
 export async function POST(request) {
     try {
         const { username, password } = await request.json();
 
-        const adminPath = path.join(process.cwd(), 'data', 'admin.json');
-        const adminData = JSON.parse(fs.readFileSync(adminPath, 'utf8'));
+        // Connect to MongoDB
+        await connectDB();
 
-        if (username !== adminData.username) {
+        // Find admin user
+        const admin = await Admin.findOne({ username });
+
+        if (!admin) {
             return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
         }
 
-        const isValid = await bcrypt.compare(password, adminData.password);
+        // Verify password
+        const isValid = await bcrypt.compare(password, admin.password);
 
         if (!isValid) {
             return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
@@ -25,6 +29,7 @@ export async function POST(request) {
 
         return NextResponse.json({ success: true, token });
     } catch (error) {
+        console.error('Login error:', error);
         return NextResponse.json({ error: 'Login failed' }, { status: 500 });
     }
 }

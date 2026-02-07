@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import fs from 'fs';
-import path from 'path';
+import connectDB from '@/lib/mongodb';
+import Portfolio from '@/models/Portfolio';
 
 export async function POST(req) {
     try {
@@ -15,10 +15,10 @@ export async function POST(req) {
             );
         }
 
-        // Read portfolio data to get recipient email if not provided
-        const portfolioPath = path.join(process.cwd(), 'data', 'portfolio.json');
-        const portfolioData = JSON.parse(fs.readFileSync(portfolioPath, 'utf8'));
-        const recipientEmail = to || portfolioData.contact?.recipientEmail || portfolioData.contact?.email;
+        // Connect to MongoDB and get recipient email if not provided
+        await connectDB();
+        const portfolioData = await Portfolio.findOne();
+        const recipientEmail = to || portfolioData?.contact?.recipientEmail || portfolioData?.contact?.email;
 
         if (!recipientEmail) {
             return NextResponse.json(

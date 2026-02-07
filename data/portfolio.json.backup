@@ -1,0 +1,82 @@
+{
+  "hero": {
+    "banner": "/uploads/banner_1767701787093_download.gif",
+    "title": "3D Developer",
+    "subtitle": "Bringing Ideas to Life",
+    "description": "Crafting immersive 3D experiences through cutting-edge technology and creative innovation",
+    "stats": {
+      "experience": "5+",
+      "projects": "50+",
+      "clients": "30+"
+    }
+  },
+  "about": {
+    "image": "/uploads/about-profile_1767701995782_download__7_.jpg",
+    "description": "I'm a passionate 3D Developer with a deep love for creating immersive digital experiences. My journey in 3D graphics began several years ago, and since then, I've been dedicated to pushing the boundaries of what's possible in real-time 3D rendering.\n\nMy expertise spans across multiple disciplines including 3D modeling, texturing, animation, and real-time rendering. I specialize in creating optimized, high-quality assets for games, virtual reality, and interactive applications.\n\nWhen I'm not crafting 3D worlds, you can find me exploring new rendering techniques, learning cutting-edge technologies, and contributing to the 3D development community."
+  },
+  "education": [
+    {
+      "id": "edu1",
+      "degree": "Bachelor of Computer Science",
+      "institution": "Tech University",
+      "year": "2016 - 2020",
+      "specialization": "Specialized in Computer Graphics, 3D Programming & Rendering, Graduated with Honors"
+    }
+  ],
+  "tools": [
+    {
+      "id": "tool1",
+      "category": "3D Software",
+      "items": [
+        "Blender",
+        "Maya",
+        "3ds Max",
+        "Cinema 4D",
+        "ZBrush",
+        "Substance Painter"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp1",
+      "title": "Senior 3D Developer",
+      "company": "Tech Studios Inc.",
+      "year": "2022 - Present",
+      "works": "Lead 3D asset pipeline development for AAA game projects\nOptimize real-time rendering performance for VR applications\nMentor junior developers and conduct code reviews\nImplement procedural generation systems using Houdini"
+    }
+  ],
+  "works": [
+    {
+      "id": "work1",
+      "title": "Cyberpunk City",
+      "description": "A stunning futuristic cityscape with neon lights and detailed architecture. Created for a AAA game project with optimized performance.",
+      "image": "/uploads/work_1767704808951_download__2_.gif",
+      "tools": "Blender, Unity, Substance Painter"
+    },
+    {
+      "id": "work2",
+      "title": "Sci-Fi Character",
+      "description": "High-detail game-ready character model with PBR materials and optimized topology for real-time rendering.",
+      "image": "/uploads/work_1767704817461_download__1_.gif",
+      "tools": "Maya, ZBrush, Marmoset"
+    },
+    {
+      "id": "work3",
+      "title": "Fantasy Environment",
+      "description": "Magical forest environment with detailed foliage and atmospheric lighting for an indie RPG game.",
+      "image": "/uploads/work_1767703770805_HEN__Egor_Ilyin.gif",
+      "tools": "Unreal-Engine, Houdini, Photoshop"
+    }
+  ],
+  "3dModels": [],
+  "contact": {
+    "email": "contact@3ddev.com",
+    "phone": "+123 456 7890",
+    "location": "Your City, Country",
+    "linkedin": "https://linkedin.com",
+    "artstation": "https://artstation.com",
+    "github": "https://github.com",
+    "recipientEmail": "kadampan2001@gmail.com"
+  }
+}

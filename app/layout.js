@@ -10,7 +10,7 @@ const russoOne = Russo_One({
 });
 
 export const metadata = {
-  title: '3D Artist Portfolio | Creative 3D Experiences',
+  title: 'Kadampan | My Portfolio',
   description: 'Professional 3D artist portfolio showcasing immersive 3D experiences, creative modeling, and stunning visual projects.',
   keywords: '3D Artist, 3D Modeling, Game Developer, Unity, Unreal Engine, Blender, Maya, Cinema 4D',
 };

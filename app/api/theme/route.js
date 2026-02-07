@@ -1,12 +1,34 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import connectDB from '@/lib/mongodb';
+import Theme from '@/models/Theme';
 
 // GET theme settings
 export async function GET() {
     try {
-        const themePath = path.join(process.cwd(), 'data', 'theme.json');
-        const themeData = JSON.parse(fs.readFileSync(themePath, 'utf8'));
+        await connectDB();
+
+        let theme = await Theme.findOne();
+
+        if (!theme) {
+            // Return default theme if none exists
+            return NextResponse.json({
+                logo: {},
+                headings: {},
+                sectionTitles: {},
+                buttons: {},
+                navLinks: {},
+                hyperlinks: {},
+                globalColors: {}
+            });
+        }
+
+        // Convert to plain object and remove MongoDB fields
+        const themeData = theme.toObject();
+        delete themeData._id;
+        delete themeData.__v;
+        delete themeData.createdAt;
+        delete themeData.updatedAt;
+
         return NextResponse.json(themeData);
     } catch (error) {
         console.error('Failed to read theme:', error);
@@ -17,10 +39,21 @@ export async function GET() {
 // POST/PUT update theme settings
 export async function POST(request) {
     try {
-        const themeData = await request.json();
-        const themePath = path.join(process.cwd(), 'data', 'theme.json');
+        await connectDB();
 
-        fs.writeFileSync(themePath, JSON.stringify(themeData, null, 2));
+        const themeData = await request.json();
+
+        let theme = await Theme.findOne();
+
+        if (theme) {
+            // Update existing theme
+            Object.assign(theme, themeData);
+            await theme.save();
+        } else {
+            // Create new theme
+            theme = new Theme(themeData);
+            await theme.save();
+        }
 
         return NextResponse.json({ success: true, message: 'Theme updated successfully' });
     } catch (error) {
