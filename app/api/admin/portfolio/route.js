@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
 import jwt from 'jsonwebtoken';
+import connectDB from '@/lib/mongodb';
+import Portfolio from '@/models/Portfolio';
 
-const PORTFOLIO_FILE = path.join(process.cwd(), 'data', 'portfolio.json');
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this-in-production';
 
 // Verify JWT token
@@ -34,21 +33,37 @@ export async function PUT(request) {
 
         const updatedData = await request.json();
 
-        // Write updated portfolio data
-        await fs.writeFile(
-            PORTFOLIO_FILE,
-            JSON.stringify(updatedData, null, 2),
-            'utf-8'
-        );
+        // Connect to MongoDB
+        await connectDB();
+
+        // Update portfolio in MongoDB
+        let portfolio = await Portfolio.findOne();
+
+        if (portfolio) {
+            // Update existing portfolio
+            Object.assign(portfolio, updatedData);
+            await portfolio.save();
+        } else {
+            // Create new portfolio if doesn't exist
+            portfolio = new Portfolio(updatedData);
+            await portfolio.save();
+        }
+
+        // Return clean data without MongoDB fields
+        const responseData = portfolio.toObject();
+        delete responseData._id;
+        delete responseData.__v;
+        delete responseData.createdAt;
+        delete responseData.updatedAt;
 
         return NextResponse.json({
             message: 'Portfolio updated successfully',
-            data: updatedData
+            data: responseData
         });
     } catch (error) {
         console.error('Update error:', error);
         return NextResponse.json(
-            { message: 'Failed to update portfolio' },
+            { message: 'Failed to update portfolio', error: error.message },
             { status: 500 }
         );
     }
