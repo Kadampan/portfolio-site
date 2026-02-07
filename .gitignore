@@ -41,7 +41,6 @@ yarn-error.log*
 next-env.d.ts
 
 # uploads (user-generated content)
-/public/uploads/*
 !/public/uploads/README.md
 
 # admin credentials (security)
